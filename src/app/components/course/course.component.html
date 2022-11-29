@@ -1,0 +1,14 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <h4 class="card-title">{{ course.name }}</h4>
+        <p>{{ course.description }}</p>
+        <p>{{ course.price }} PHP</p>
+        <div *ngIf="isAdmin;">
+            <button type="button" class="btn btn-primary" (click)="edit()">Edit</button>&nbsp;
+            <button type="button" class="btn btn-warning" (click)="archive(course)">Archive</button>
+        </div>
+        <div *ngIf="hasToken && isAdmin === false;">
+            <button type="button" class="btn btn-primary" (click)="enroll()">Enroll</button>
+        </div>
+    </div>
+</div>

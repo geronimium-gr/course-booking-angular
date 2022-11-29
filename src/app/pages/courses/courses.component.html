@@ -1,0 +1,7 @@
+<div class="container-fluid">
+    <h3>Course Catalog</h3>
+    <div *ngIf="isAdmin;" class="mb-3">
+        <button class="btn btn-success" (click)="onAddCourseClick()">Add Course</button>
+    </div>
+    <app-course *ngFor="let course of courses" [course]="course" [deleteFromView]="deleteFromView.bind(this)"></app-course>
+</div>
