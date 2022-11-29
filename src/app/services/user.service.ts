@@ -28,7 +28,7 @@ export class UserService {
         return this.http.post(this.baseUrl + '/register', user);
     }
 
-    enroll(courseId: number): Observable<Object> {
-        return this.http.post(this.baseUrl + '/enroll', { courseId }, { headers: this.httpHeaders });
+    enroll(courseId: number, userId: string): Observable<Object> {
+        return this.http.post(this.baseUrl + '/enroll', { courseId: courseId, id: userId }, { headers: this.httpHeaders });
     }
 }

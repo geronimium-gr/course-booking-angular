@@ -16,6 +16,8 @@ import { CoursesComponent } from './pages/courses/courses.component';
 import { CourseComponent } from './components/course/course.component';
 import { EditCourseComponent } from './pages/edit-course/edit-course.component';
 import { AddCourseComponent } from './pages/add-course/add-course.component';
+import { ReviewComponent } from './pages/review/review.component';
+import { AddReviewComponent } from './pages/add-review/add-review.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -24,6 +26,8 @@ const appRoutes: Routes = [
     { path: 'courses', component: CoursesComponent },
     { path: 'edit-course/:id', component: EditCourseComponent },
     { path: 'add-course', component: AddCourseComponent },
+    { path: 'reviews', component: ReviewComponent },
+    { path: 'add-review/:id', component: AddReviewComponent },
     { path: '**', component: NotFoundComponent }
 ];
 
@@ -40,7 +44,9 @@ const appRoutes: Routes = [
         CoursesComponent,
         CourseComponent,
         EditCourseComponent,
-        AddCourseComponent
+        AddCourseComponent,
+        ReviewComponent,
+        AddReviewComponent
     ],
     imports: [
         BrowserModule,

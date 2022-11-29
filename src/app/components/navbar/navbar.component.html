@@ -9,6 +9,9 @@
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/courses">Courses</a>
                 </li>
+                <li *ngIf="hasToken" class="nav-item">
+                    <a class="nav-link" routerLink="/reviews">Reviews</a>
+                </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <div *ngIf="hasToken; else noToken">

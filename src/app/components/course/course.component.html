@@ -8,7 +8,8 @@
             <button type="button" class="btn btn-warning" (click)="archive(course)">Archive</button>
         </div>
         <div *ngIf="hasToken && isAdmin === false;">
-            <button type="button" class="btn btn-primary" (click)="enroll()">Enroll</button>
+            <button type="button" class="btn btn-primary m-3" (click)="enroll()">Enroll</button>
+            <button type="button" class="btn btn-warning" (click)="review()">Review</button>
         </div>
     </div>
 </div>

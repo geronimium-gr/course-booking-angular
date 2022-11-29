@@ -18,6 +18,7 @@ export class CourseComponent implements OnInit {
 
     isAdmin: boolean = false;
     hasToken: boolean = (localStorage.getItem('token') !== null);
+    userId: string;
 
     constructor(
         private courseService: CourseService,
@@ -26,12 +27,13 @@ export class CourseComponent implements OnInit {
         private router: Router
     ) {
         this.isAdmin = sessionService.getIsAdmin();
+        this.userId = sessionService.getId();
     }
 
     ngOnInit(): void { }
 
     enroll(): void {
-        this.userService.enroll(this.course.id!).subscribe({
+        this.userService.enroll(this.course.id!, this.userId).subscribe({
             next: this.successfulEnrollment.bind(this), 
             error: this.failedEnrollment.bind(this)
         });
@@ -55,6 +57,11 @@ export class CourseComponent implements OnInit {
                 });
             }
         });
+    }
+
+
+    review() {
+        this.router.navigate(['/add-review/' + this.course.id]);
     }
 
     successfulEnrollment(response: Record<string, any>) {

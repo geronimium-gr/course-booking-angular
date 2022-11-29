@@ -30,9 +30,11 @@ export class LoginComponent implements OnInit {
     }
 
     successfulLogin(response: Record<string, any>) {
+        console.log(response);
         this.sessionService.setEmail(response['email']);
         this.sessionService.setIsAdmin(response['isAdmin']);
         this.sessionService.setToken(response['token']);
+        this.sessionService.setId(response['id']);
         this.router.navigate(['']);
     }
 

@@ -26,6 +26,10 @@ export class SessionService {
         return localStorage.getItem('isAdmin')! === 'true';
     }
 
+    getId(): string {
+        return localStorage.getItem('id')!;
+    }
+
     setToken(value: string): void {
         this.hasToken.emit(true);
         localStorage.setItem('token', value);
@@ -37,6 +41,10 @@ export class SessionService {
 
     setIsAdmin(value: string): void {
         localStorage.setItem('isAdmin', value);
+    }
+
+    setId(value: string): void {
+        localStorage.setItem('id', value);
     }
 
     clear(): void {

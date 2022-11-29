@@ -1,0 +1,20 @@
+<!-- <div class="card mb-3">
+  <div *ngFor="let review of reviews" class="card-body">
+      <h3>{{ review.user.firstName }} {{ review.user.lastName }}</h3>
+      <p>{{ review.courseId }}</p>
+      <p>{{ review.feedback }}</p>
+      <p>{{ review.rating }} Stars</p>
+  </div>
+</div> -->
+
+<div *ngFor="let review of reviews" class="card m-3">
+  <div class="card-body">
+    <h5 class="card-title">{{ review.course.name }}</h5>
+    <p class="card-text"><strong>Comment:</strong> {{ review.feedback }}</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Reviewer: {{ review.user.firstName }} {{ review.user.lastName }}</li>
+    <li class="list-group-item">Rating: {{ review.rating }} stars</li>
+    <li class="list-group-item">Created: {{ review.datetimeCreated }}</li>
+  </ul>
+</div>
