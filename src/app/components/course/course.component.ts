@@ -17,20 +17,29 @@ export class CourseComponent implements OnInit {
     @Input() deleteFromView!: Function;
 
     isAdmin: boolean = false;
+    isEnrolled: boolean = false;
     hasToken: boolean = (localStorage.getItem('token') !== null);
-    userId: string;
+    userId!: string;
 
     constructor(
         private courseService: CourseService,
         private userService: UserService,
         private sessionService: SessionService,
         private router: Router
-    ) {
-        this.isAdmin = sessionService.getIsAdmin();
-        this.userId = sessionService.getId();
+    ) {}
+
+    ngOnInit(): void { 
+        this.isAdmin = this.sessionService.getIsAdmin();
+        this.userId = this.sessionService.getId();
+
+        this.checkEnrollStatus();
     }
 
-    ngOnInit(): void { }
+    checkEnrollStatus() {
+        this.courseService.checkIfEnrolled(this.course.id, this.userId).subscribe((response: Record<string, any>) => {
+            response['result'] === "not_enrolled" ? this.isEnrolled = false : this.isEnrolled = true
+        })
+    }
 
     enroll(): void {
         this.userService.enroll(this.course.id!, this.userId).subscribe({
@@ -65,7 +74,10 @@ export class CourseComponent implements OnInit {
     }
 
     successfulEnrollment(response: Record<string, any>) {
-        Swal.fire('Enrollment Successful', 'Enjoy the course!', 'success');
+        Swal.fire({
+           title: 'Enrollment Successful', 
+           text: 'Enjoy the course!', 
+           icon: 'success'}).then(() => this.checkEnrollStatus());
     }
 
     failedEnrollment(result: Record<string, any>) {

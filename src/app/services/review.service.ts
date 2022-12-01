@@ -23,8 +23,8 @@ export class ReviewService {
       private sessionService: SessionService
   ) { }
 
-  findAll(): Observable<Review[]> {
-    return this.http.get<Review[]>(this.baseUrl);
+  findAll(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl);
   }
 
   save(courseId: number, userId: string, review: Review): Observable<Object> {

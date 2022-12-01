@@ -18,12 +18,12 @@ export class CoursesComponent implements OnInit {
         private courseService: CourseService,
         private sessionService: SessionService,
         private router: Router
-    ) {
-        this.getCourses();
-        this.isAdmin = sessionService.getIsAdmin();
-    }
+    ) {}
 
-    ngOnInit(): void { }
+    ngOnInit(): void { 
+        this.getCourses();
+        this.isAdmin = this.sessionService.getIsAdmin();
+    }
 
     getCourses() {
         this.courseService.get().subscribe((response: Course[]) => {

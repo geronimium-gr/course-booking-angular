@@ -39,4 +39,11 @@ export class CourseService {
     archive(id: number): Observable<Object> {
         return this.http.delete(this.baseUrl + `/${id}`, { headers: this.httpHeaders });
     }
+
+    checkIfEnrolled(courseId: any, userId: string): Observable<Object> {
+        return this.http.post(
+            `${this.baseUrl}/enrolled`,
+            { courseId: courseId, userId: userId },
+            { headers: this.httpHeaders });
+    }
 }
