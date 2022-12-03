@@ -1,25 +1,43 @@
-<div class="card mb-3">
-    <div class="card-body">
-        <h4 class="card-title">{{ course.name }}</h4>
-        <p>{{ course.description }}</p>
-        <p>{{ course.price }} PHP</p>
-        <div *ngIf="isAdmin;">
-            <button type="button" class="btn btn-primary" (click)="edit()">Edit</button>&nbsp;
-            <button type="button" class="btn btn-warning" (click)="archive(course)">Archive</button>
-        </div>
-        <div *ngIf="hasToken && isAdmin === false;">
-            <button 
-                [disabled]="isEnrolled" 
-                type="button" 
-                class="btn btn-primary m-3" 
-                (click)="enroll()">{{isEnrolled ? "Enrolled" : "Enroll"}}
-            </button>
-            <button 
-                [disabled]="!isEnrolled" 
-                type="button" 
-                class="btn btn-warning" 
-                (click)="review()">Review
-            </button>
-        </div>
-    </div>
-</div>
+<ul class="list-group shadow">
+    <!-- list group item-->
+    <li class="list-group-item">
+        <!-- Custom content-->
+        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+            <div class="media-left">
+                <img [src]="imageUrl" alt="Generic placeholder image" width="100" class="img-fluid media-object mb-3 rounded">
+            </div>
+            <div class="media-body">
+                <h5 class="mt-0 font-weight-bold mb-2">{{ course.name }}</h5>
+                <p class="font-italic text-muted mb-0 small">{{ course.description }}</p>
+                <div class="d-flex align-items-center justify-content-between mt-1">
+                    <h6 class="font-weight-bold my-2">&#8369; {{ course.price }}</h6>
+                    <ul class="list-inline small">
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
+                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                    </ul>
+                </div>
+                <div *ngIf="isAdmin;">
+                    <button type="button" class="btn btn-primary" (click)="edit()">Edit</button>&nbsp;
+                    <button type="button" class="btn btn-warning" (click)="archive(course)">Archive</button>
+                </div>
+                <div *ngIf="hasToken && isAdmin === false;" class="d-flex gap-3 my-2">
+                    <button 
+                        [disabled]="isEnrolled" 
+                        type="button" 
+                        class="btn btn-primary" 
+                        (click)="enroll()">{{isEnrolled ? "Enrolled" : "Enroll"}}
+                    </button>
+                    <button 
+                        [disabled]="!isEnrolled" 
+                        type="button" 
+                        class="btn btn-warning" 
+                        (click)="review()">Review
+                    </button>
+                </div>
+            </div>
+        </div> <!-- End -->
+    </li> <!-- End -->
+</ul> <!-- End -->

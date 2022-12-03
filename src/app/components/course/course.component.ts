@@ -20,6 +20,7 @@ export class CourseComponent implements OnInit {
     isEnrolled: boolean = false;
     hasToken: boolean = (localStorage.getItem('token') !== null);
     userId!: string;
+    imageUrl!: string;
 
     constructor(
         private courseService: CourseService,
@@ -31,6 +32,8 @@ export class CourseComponent implements OnInit {
     ngOnInit(): void { 
         this.isAdmin = this.sessionService.getIsAdmin();
         this.userId = this.sessionService.getId();
+
+        this.imageUrl = `https://avatars.dicebear.com/api/initials/${this.course.name}.svg`
 
         this.checkEnrollStatus();
     }
