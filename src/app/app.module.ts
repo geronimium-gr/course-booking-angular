@@ -18,6 +18,7 @@ import { EditCourseComponent } from './pages/edit-course/edit-course.component';
 import { AddCourseComponent } from './pages/add-course/add-course.component';
 import { ReviewComponent } from './pages/review/review.component';
 import { AddReviewComponent } from './pages/add-review/add-review.component';
+import { RatingsPipe } from './pipes/ratings.pipe';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -46,7 +47,8 @@ const appRoutes: Routes = [
         EditCourseComponent,
         AddCourseComponent,
         ReviewComponent,
-        AddReviewComponent
+        AddReviewComponent,
+        RatingsPipe,
     ],
     imports: [
         BrowserModule,

@@ -27,7 +27,11 @@ export class ReviewService {
     return this.http.get<any[]>(this.baseUrl);
   }
 
+  findAllRatings(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/ratings`)
+  }
+
   save(courseId: number, userId: string, review: Review): Observable<Object> {
-    return this.http.post(`http://localhost:8080/api/${courseId}/reviews`, {rating: review.rating, feedback: review.feedback, user:{id: userId}}, { headers: this.httpHeaders });
+    return this.http.post(`${this.baseUrl}/${courseId}`, {rating: review.rating, feedback: review.feedback, user:{id: userId}}, { headers: this.httpHeaders });
   }
 }

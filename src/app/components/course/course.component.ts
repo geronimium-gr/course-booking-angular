@@ -6,6 +6,9 @@ import { Course } from '@models/course';
 import { UserService } from '@services/user.service';
 import { CourseService } from '@services/course.service';
 import { SessionService } from '@services/session.service';
+import { ICourses } from 'src/app/interfaces/Icourses.interface';
+
+
 
 @Component({
     selector: 'app-course',
@@ -13,7 +16,7 @@ import { SessionService } from '@services/session.service';
     styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnInit {
-    @Input() course!: Course;
+    @Input() course!: ICourses;
     @Input() deleteFromView!: Function;
 
     isAdmin: boolean = false;
@@ -36,16 +39,17 @@ export class CourseComponent implements OnInit {
         this.imageUrl = `https://avatars.dicebear.com/api/initials/${this.course.name}.svg`
 
         this.checkEnrollStatus();
+
     }
 
     checkEnrollStatus() {
-        this.courseService.checkIfEnrolled(this.course.id, this.userId).subscribe((response: Record<string, any>) => {
+        this.courseService.checkIfEnrolled(this.course.courseId, this.userId).subscribe((response: Record<string, any>) => {
             response['result'] === "not_enrolled" ? this.isEnrolled = false : this.isEnrolled = true
         })
     }
 
     enroll(): void {
-        this.userService.enroll(this.course.id!, this.userId).subscribe({
+        this.userService.enroll(this.course.courseId!, this.userId).subscribe({
             next: this.successfulEnrollment.bind(this), 
             error: this.failedEnrollment.bind(this)
         });
@@ -55,7 +59,7 @@ export class CourseComponent implements OnInit {
         this.router.navigate(['/edit-course/' + this.course.id]);
     }
 
-    archive(course: Course): void {
+    archive(course: any): void {
         Swal.fire({
             title: 'Confirm Action', 
             text: 'Do you really want to archive this course?', 
@@ -63,9 +67,11 @@ export class CourseComponent implements OnInit {
             showCancelButton: true
         }).then((result) => {
             if (result.isConfirmed) {
-                this.courseService.archive(this.course.id!).subscribe((response: Record<string, any>) => {
+                this.courseService.archive(this.course.courseId!).subscribe((response: Record<string, any>) => {
                     Swal.fire('Archive Successful', 'The course has been successfully archived.', 'success');
                     this.deleteFromView(course);
+                    console.log(course);
+                    
                 });
             }
         });
@@ -73,7 +79,7 @@ export class CourseComponent implements OnInit {
 
 
     review() {
-        this.router.navigate(['/add-review/' + this.course.id]);
+        this.router.navigate(['/add-review/' + this.course.courseId]);
     }
 
     successfulEnrollment(response: Record<string, any>) {

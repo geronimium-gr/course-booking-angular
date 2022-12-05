@@ -10,16 +10,21 @@
                 <h5 class="mt-0 font-weight-bold mb-2">{{ course.name }}</h5>
                 <p class="font-italic text-muted mb-0 small">{{ course.description }}</p>
                 <div class="d-flex align-items-center justify-content-between mt-1">
-                    <h6 class="font-weight-bold my-2">&#8369; {{ course.price }}</h6>
+                    <h6 class="font-weight-bold my-2">{{ course.price | currency: 'PHP' }}</h6>
+
+                    <!-- To display rating system -->
                     <ul class="list-inline small">
-                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                        <li class="list-inline-item m-0"><i class="fa fa-star text-success"></i></li>
-                        <li class="list-inline-item m-0"><i class="fa fa-star-o text-gray"></i></li>
+                        <span class="font-weight-bold mx-2">Rating:</span>
+                        <li *ngFor="let item of course.rating | ratings let i = index" class="list-inline-item m-0">
+                            <i *ngIf="i <= course.rating" class="bi bi-star-fill"></i>
+                        </li>
+                        <li *ngFor="let item of 5 - course.rating | ratings let i = index" class="list-inline-item m-0">
+                            <i *ngIf="course.rating < 5" class="bi bi-star"></i>
+                        </li>
                     </ul>
+
                 </div>
-                <div *ngIf="isAdmin;">
+                <div *ngIf="isAdmin">
                     <button type="button" class="btn btn-primary" (click)="edit()">Edit</button>&nbsp;
                     <button type="button" class="btn btn-warning" (click)="archive(course)">Archive</button>
                 </div>
