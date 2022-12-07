@@ -23,8 +23,8 @@ export class ReviewService {
       private sessionService: SessionService
   ) { }
 
-  findAll(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl);
+  findAll(courseId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/${courseId}`);
   }
 
   findAllRatings(): Observable<any[]> {

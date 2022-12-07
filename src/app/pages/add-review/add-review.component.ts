@@ -1,8 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Review } from '@models/review';
 import { ReviewService } from '@services/review.service';
-import { SessionService } from '@services/session.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,18 +11,12 @@ import Swal from 'sweetalert2';
 export class AddReviewComponent implements OnInit, OnDestroy {
 
   review: Review = new Review();
-  courseId: number;
-  userId: string;
+  @Input() courseId!: number;
+  @Input() userId!: string;
 
   constructor(
-    private reviewService: ReviewService,
-    private sessionService: SessionService,
-    private router: Router,
-    private route: ActivatedRoute) 
-    { 
-       this.courseId = this.route.snapshot.params['id'];
-       this.userId = sessionService.getId();
-    }
+    private reviewService: ReviewService) 
+    {  }
 
   ngOnInit(): void {
   }
@@ -33,8 +25,6 @@ export class AddReviewComponent implements OnInit, OnDestroy {
       this.reviewService.save(this.courseId, this.userId, this.review).subscribe((response) => {
         console.log(response);
       })
-
-      this.router.navigate(['/reviews']);
   }
 
   ngOnDestroy(): void {

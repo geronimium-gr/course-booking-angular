@@ -27,8 +27,7 @@ const appRoutes: Routes = [
     { path: 'courses', component: CoursesComponent },
     { path: 'edit-course/:id', component: EditCourseComponent },
     { path: 'add-course', component: AddCourseComponent },
-    { path: 'reviews', component: ReviewComponent },
-    { path: 'add-review/:id', component: AddReviewComponent },
+    { path: 'reviews/:id', component: ReviewComponent },
     { path: '**', component: NotFoundComponent }
 ];
 

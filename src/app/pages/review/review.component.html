@@ -1,20 +1,43 @@
-<!-- <div class="card mb-3">
-  <div *ngFor="let review of reviews" class="card-body">
-      <h3>{{ review.user.firstName }} {{ review.user.lastName }}</h3>
-      <p>{{ review.courseId }}</p>
-      <p>{{ review.feedback }}</p>
-      <p>{{ review.rating }} Stars</p>
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Add a Review
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <app-add-review [courseId]="courseId" [userId]="userId"></app-add-review>
+      </div>
+    </div>
   </div>
-</div> -->
+</div>
 
-<div *ngFor="let review of reviews" class="card m-3">
-  <div class="card-body">
-    <h5 class="card-title">{{ review.course.name }}</h5>
-    <p class="card-text"><strong>Comment:</strong> {{ review.feedback }}</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Reviewer: {{ review.user.firstName }} {{ review.user.lastName }}</li>
-    <li class="list-group-item">Rating: {{ review.rating }} stars</li>
-    <li class="list-group-item">Created: {{ review.datetimeCreated }}</li>
-  </ul>
+<div *ngFor="let review of reviews" class="list-group w-auto">
+  <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3 my-2" aria-current="true">
+    <img [src]="'https://avatars.dicebear.com/api/micah/' + review.user.firstName + '.svg'" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <div>
+        <span class="pt-1 form-checked-content">
+          <h6 class="mb-1">{{ review.user.firstName }} {{ review.user.lastName }}</h6>
+
+            <small class="d-block text-muted">
+              <ul class="small">
+                <span class="font-weight-bold me-2">Rating:</span>
+                <li *ngFor="let item of review.rating | ratings let i = index" class="list-inline-item m-0">
+                    <i *ngIf="i <= review.rating" class="bi bi-star-fill"></i>
+                </li>
+                <li *ngFor="let item of 5 - review.rating | ratings let i = index" class="list-inline-item m-0">
+                    <i *ngIf="review.rating < 5" class="bi bi-star"></i>
+                </li>
+              </ul>
+          </small>
+          
+        </span>
+       
+        <p class="mb-0 opacity-75">{{ review.feedback }}</p>
+      </div>
+      <small class="opacity-50 text-nowrap">{{ review.datetimeCreated | date: 'shortDate'}}</small>
+    </div>
+  </a>
 </div>

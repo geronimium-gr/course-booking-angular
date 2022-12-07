@@ -79,7 +79,7 @@ export class CourseComponent implements OnInit {
 
 
     review() {
-        this.router.navigate(['/add-review/' + this.course.courseId]);
+        this.router.navigate(['/reviews/' + this.course.courseId]);
     }
 
     successfulEnrollment(response: Record<string, any>) {
