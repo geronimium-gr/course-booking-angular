@@ -1,0 +1,19 @@
+.icon-yellow {
+  color: #e0a800;
+  border-color: #d39e00;
+}
+
+.btn-light {
+  color: #000;
+  background-color: transparent; 
+  border-color: transparent;
+}
+
+.star-btn {
+  padding: 0 0.2rem;
+}
+
+.star-btn:focus, .star-btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
